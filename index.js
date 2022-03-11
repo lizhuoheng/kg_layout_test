@@ -42,22 +42,24 @@ const height = container.scrollHeight || 580;
 // confidence 表示预测的可信度
 // const { predictLayout, confidence } = await GraphLayoutPredict.predict(data);
 
-const tooltip = new G6.Tooltip({
-  offsetX: 10,
-  offsetY: 20,
-  getContent(e) {
-    const outDiv = document.createElement('div');
-    outDiv.style.width = '180px';
-    outDiv.innerHTML = `
-      <h4>Tooltip</h4>
-      <ul>
-        <li>Label: ${e.item.getModel().label || e.item.getModel().id}</li>
-      </ul>`;
-    return outDiv;
-  },
-  itemTypes: ['node'],
-  // trigger: 'click',
-});
+// const tooltip = new G6.Tooltip({
+//   // offsetX: 10,
+//   // offsetY: 20,
+//   getContent(e) {
+//     const outDiv = document.createElement('div');
+//     outDiv.style.width = '180px';
+//     outDiv.innerHTML = `
+//       <h4>Tooltip</h4>
+//       <ul>
+//         <li>Label: ${e.item.getModel().label || e.item.getModel().id}</li>
+//       </ul>`;
+      
+//     return outDiv;
+//   },
+//   itemTypes: ['node'],
+//   trigger: 'click',
+//   fixToNode: 'true',
+// });
 
 const graph = new G6.Graph({
   container: 'container',
@@ -84,6 +86,9 @@ const graph = new G6.Graph({
       //   trigger: 'click',
       //   resetSelected: true,
       // },
+      {
+        type: 'tooltip',
+      }
     ],
   },
   layout: {
@@ -104,7 +109,7 @@ const graph = new G6.Graph({
   //   duration: 1000, // Number，一次动画的时长
   //   easing: 'easeCubic', // String，动画函数
   // },
-  plugins: [tooltip], // 配置 Grid 插件和 Minimap 插件
+  // plugins: [tooltip], // 配置 Grid 插件和 Minimap 插件
   defaultNode: {
     size: 15,
     style: {
@@ -176,27 +181,27 @@ graph.render();
 
 //首次学习时，只展开第一个combo？？待定
 graph.on('afterrender', (evt) => {
-  const combos = graph.getCombos();
-  combos.forEach((combo, index) => {
-    if (!combo || combo.destroyed || combo.getType() !== 'combo') return;
-    // if (index) graph.collapseCombo(combo);
-    // graph.setItemState(combo, 'visible ', false);
-    combo.hide();
-    // graph.refreshPositions();
-    //graph.updateCombos()
-  });
+  // const combos = graph.getCombos();
+  // combos.forEach((combo, index) => {
+  //   if (!combo || combo.destroyed || combo.getType() !== 'combo') return;
+  //   if (index) graph.collapseCombo(combo);
+  //   // graph.setItemState(combo, 'visible ', false);
+  //   // combo.hide();
+  //   graph.refreshPositions();
+  //   //graph.updateCombos()
+  // });
 
-  combos.forEach((combo, index) => {
-    if (!combo || combo.destroyed || combo.getType() !== 'combo') return;
-    // if (index) graph.collapseCombo(combo);
-    // graph.setItemState(combo, 'visible ', false);
-    setTimeout(() => {
-      combo.show();
-    }, 100 * index);
+  // combos.forEach((combo, index) => {
+  //   if (!combo || combo.destroyed || combo.getType() !== 'combo') return;
+  //   // if (index) graph.collapseCombo(combo);
+  //   // graph.setItemState(combo, 'visible ', false);
+  //   setTimeout(() => {
+  //     combo.show();
+  //   }, 100 * index);
 
-    // graph.refreshPositions();
-    //graph.updateCombos()
-  });
+  //   // graph.refreshPositions();
+  //   //graph.updateCombos()
+  // });
 });
 
 // graph.on('node:click', (evt) => {

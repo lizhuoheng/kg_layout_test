@@ -310,64 +310,64 @@ export const data = {
       id: 'A',
       label: '集合的概念',
       style: {
-        fill: '#C4E3B2',
-        stroke: '#C4E3B2',
+        // fill: '#C4E3B2',
+        // stroke: '#C4E3B2',
       },
     },
     {
       id: 'B',
       label: '元素与集合',
       style: {
-        stroke: '#99C0ED',
-        fill: '#99C0ED',
+        // stroke: '#99C0ED',
+        // fill: '#99C0ED',
       },
     },
     {
       id: 'C',
       label: '集合性质的应用',
       style: {
-        stroke: '#ff7070',
-        fill: '#ff7070',
+        // stroke: '#ff7070',
+        // fill: '#ff7070',
       },
     },
     {
       id: 'D',
       label: '集合的表示方法',
       style: {
-        stroke: '#C4E3B2',
-        fill: '#C4E3B2',
+        // stroke: '#C4E3B2',
+        // fill: '#C4E3B2',
       },
     },
     {
       id: 'E',
       label: '集合间的基本关系',
       style: {
-        stroke: '#99C0ED',
-        fill: '#99C0ED',
+        // stroke: '#99C0ED',
+        // fill: '#99C0ED',
       },
     },
     {
       id: 'F',
       label: '集合的基本运算',
       style: {
-        stroke: '#ff7070',
-        fill: '#ff7070',
+        // stroke: '#ff7070',
+        // fill: '#ff7070',
       },
     },
     {
       id: 'G',
       label: '集合的交并补混合运算',
       style: {
-        stroke: '#C4E3B2',
-        fill: '#C4E3B2',
+        // stroke: '#C4E3B2',
+        // fill: '#C4E3B2',
       },
     },
     {
       id: 'H',
       label: 'Venn图',
       style: {
-        stroke: '#99C0ED',
-        fill: '#99C0ED',
+        // stroke: '#99C0ED',
+        // fill: '#99C0ED',
       },
     },
   ],
