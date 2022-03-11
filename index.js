@@ -318,7 +318,7 @@ const graph = new G6.Graph({
     labelCfg: {
       style: {
         fill: '#9ec9ff',
-        fontSize: 10,
+        fontSize: 12,
         background: {
           // fill: '#ffffff',
           stroke: '#9EC9FF',
@@ -360,6 +360,11 @@ const graph = new G6.Graph({
     type: 'circle', // rect  circle
     style: {
       fillOpacity: 0.1,
+    },
+    labelCfg: {
+      style: {
+        fontSize: 20,
+      },
     },
   },
 });
