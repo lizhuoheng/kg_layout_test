@@ -131,6 +131,11 @@ export default {
       graph.setItemState(item, inactiveState, false);
     }
     graph.setItemState(item, activeState, true);
+    // 动画地移动，并配置动画
+    graph.focusItem(item, true, {
+      easing: 'easeCubic',
+      duration: 400,
+    });
 
     const rEdges = item.getEdges();
     const rEdgeLegnth = rEdges.length;
