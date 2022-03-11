@@ -184,17 +184,17 @@ export const data = {
     {
       source: '0',
       target: '1',
-      label: '前驱',
+      // label: '前驱',
     },
     {
       source: '0',
       target: '2',
-      label: '前驱',
+      // label: '前驱',
     },
     {
       source: '0',
       target: '3',
-      label: '前驱',
+      // label: '前驱',
     },
     {
       source: '3',
@@ -326,8 +326,8 @@ export const data = {
       id: 'C',
       label: '集合性质的应用',
       style: {
-        stroke: '#eee',
-        fill: '#eee',
+        stroke: '#ff7575',
+        fill: '#ff7575',
       },
     },
     {
@@ -350,8 +350,8 @@ export const data = {
       id: 'F',
       label: '集合的基本运算',
       style: {
-        stroke: '#eee',
-        fill: '#eee',
+        stroke: '#ff7575',
+        fill: '#ff7575',
       },
     },
     {
