@@ -41,6 +41,24 @@ const height = container.scrollHeight || 580;
 // predictLayout 表示预测的布局，如 force 或 radial
 // confidence 表示预测的可信度
 // const { predictLayout, confidence } = await GraphLayoutPredict.predict(data);
+
+const tooltip = new G6.Tooltip({
+  offsetX: 10,
+  offsetY: 20,
+  getContent(e) {
+    const outDiv = document.createElement('div');
+    outDiv.style.width = '180px';
+    outDiv.innerHTML = `
+      <h4>Tooltip</h4>
+      <ul>
+        <li>Label: ${e.item.getModel().label || e.item.getModel().id}</li>
+      </ul>`;
+    return outDiv;
+  },
+  itemTypes: ['node'],
+  // trigger: 'click',
+});
+
 const graph = new G6.Graph({
   container: 'container',
   renderer: 'canvas', // svg  canvas
@@ -81,6 +99,12 @@ const graph = new G6.Graph({
     nodesepFunc: () => 1,
     ranksepFunc: () => 1,
   },
+  // animate: true, // Boolean，切换布局时是否使用动画过度，默认为 false
+  // animateCfg: {
+  //   duration: 1000, // Number，一次动画的时长
+  //   easing: 'easeCubic', // String，动画函数
+  // },
+  plugins: [tooltip], // 配置 Grid 插件和 Minimap 插件
   defaultNode: {
     size: 15,
     style: {
@@ -142,7 +166,38 @@ const graph = new G6.Graph({
   },
 });
 graph.data(data);
+const combos = graph.getCombos();
+combos.forEach((combo, index) => {
+  const hasSelected = combo.hasState('selected');
+  graph.setItemState(combo, 'visible ', false);
+});
+
 graph.render();
+
+//首次学习时，只展开第一个combo？？待定
+graph.on('afterrender', (evt) => {
+  const combos = graph.getCombos();
+  combos.forEach((combo, index) => {
+    if (!combo || combo.destroyed || combo.getType() !== 'combo') return;
+    // if (index) graph.collapseCombo(combo);
+    // graph.setItemState(combo, 'visible ', false);
+    combo.hide();
+    // graph.refreshPositions();
+    //graph.updateCombos()
+  });
+
+  combos.forEach((combo, index) => {
+    if (!combo || combo.destroyed || combo.getType() !== 'combo') return;
+    // if (index) graph.collapseCombo(combo);
+    // graph.setItemState(combo, 'visible ', false);
+    setTimeout(() => {
+      combo.show();
+    }, 100 * index);
+
+    // graph.refreshPositions();
+    //graph.updateCombos()
+  });
+});
 
 // graph.on('node:click', (evt) => {
 //   // clearFocusItemState(graph);
