@@ -283,11 +283,11 @@ const graph = new G6.Graph({
       'zoom-canvas',
       // 'click-select',
       'activate-knode',
-      // {
-      //   type: 'collapse-expand-combo',
-      //   trigger: 'dbclick', //click dbclick
-      //   relayout: false,
-      // },
+      {
+        type: 'collapse-expand-combo',
+        trigger: 'dbclick', //click dbclick
+        relayout: false,
+      },
       // {
       //   type: 'activate-relations',
       //   trigger: 'click',
