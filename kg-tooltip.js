@@ -4,11 +4,16 @@ export default {
   getDefaultCfg() {
     return {
       item: 'node',
-      offset: 10,
+      offset: 15,
       formatText(model) {
         const text = 'ID: ' + model.id + '<br> Label: ' + model.label;
         return text;
       },
+      // shouldBegin(e) {
+      //   if (e.name=='afteranimate') {
+      //     return true;
+      //   }
+      // },
     };
   },
   getEvents() {
@@ -20,7 +25,7 @@ export default {
       'node:touchstart': 'setOnTouchStart',
       // 'combo:click': 'onMouseEnter',
       'canvas:click': 'onMouseLeave',
-      'node:mousemove': 'onMouseMove',
+      //'node:mousemove': 'onMouseMove',
       afterremoveitem: 'onMouseLeave',
     };
   },
@@ -100,16 +105,18 @@ export default {
     const point = graph.getPointByClient(e.clientX, e.clientY);
     let { x, y } = graph.getCanvasByPoint(point.x, point.y);
     const bbox = container.getBoundingClientRect();
-    if (x > width / 2) {
-      x -= bbox.width;
-    } else {
-      x += this.offset;
-    }
-    if (y > height / 2) {
-      y -= bbox.height;
-    } else {
-      y += this.offset;
-    }
+    // if (x > width / 2) {
+    //   x -= bbox.width;
+    // } else {
+    //   x += this.offset;
+    // }
+    // if (y > height / 2) {
+    //   y -= bbox.height;
+    // } else {
+    //   y += this.offset;
+    // }
+    x = width / 2 + this.offset;
+    y = height / 2 + this.offset;
     const left = `${x}px`;
     const top = `${y}px`;
     modifyCSS(this.container, { left, top, visibility: 'visible' });
