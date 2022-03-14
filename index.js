@@ -1,6 +1,7 @@
 import G6 from '@antv/g6';
 import { data } from './data';
 import activateKnode from './activate-knode';
+import kgtooltip from './kg-tooltip';
 // import { GraphLayoutPredict } from '@antv/vis-predict-engine';
 
 // data.nodes.forEach((node) => {
@@ -33,6 +34,7 @@ import activateKnode from './activate-knode';
 // });
 
 G6.registerBehavior('activate-knode', activateKnode);
+G6.registerBehavior('kg-tooltip', kgtooltip);
 
 const container = document.getElementById('container');
 const width = container.scrollWidth;
@@ -86,9 +88,15 @@ const graph = new G6.Graph({
       //   trigger: 'click',
       //   resetSelected: true,
       // },
-      {
-        type: 'tooltip',
-      }
+      'kg-tooltip',
+      // {
+      //   type: 'kg-tooltip',
+      //   formatText(model) {
+      //     const text = 'ID: ' + model.id + '<br> Label: ' + model.label;
+      //     return text;
+      //   },
+      //   offset: 10,
+      // }
     ],
   },
   layout: {
