@@ -17,11 +17,29 @@ export default {
       // 'node:mouseleave': 'onMouseLeave',
       // 'node:mousemove': 'onMouseMove',
       'node:click': 'onMouseEnter',
-      'combo:click': 'onMouseEnter',
+      'node:touchstart': 'setOnTouchStart',
+      // 'combo:click': 'onMouseEnter',
       'canvas:click': 'onMouseLeave',
       'node:mousemove': 'onMouseMove',
       afterremoveitem: 'onMouseLeave',
     };
+  },
+  setOnTouchStart(e) {
+    const self = this;
+    try {
+      const touches = e.originalEvent.touches;
+      const event1 = touches[0];
+      const event2 = touches[1];
+
+      if (event1 && event2) {
+        return;
+      }
+
+      e.preventDefault();
+    } catch (e) {
+      console.warn('Touch original event not exist!');
+    }
+    self.onMouseEnter(e);
   },
   onMouseEnter(e) {
     const { item } = e;
