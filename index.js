@@ -55,7 +55,7 @@ const height = container.scrollHeight || 580;
 //       <ul>
 //         <li>Label: ${e.item.getModel().label || e.item.getModel().id}</li>
 //       </ul>`;
-      
+
 //     return outDiv;
 //   },
 //   itemTypes: ['node'],
@@ -73,7 +73,7 @@ const graph = new G6.Graph({
   modes: {
     default: [
       // 'drag-combo',
-      // 'drag-node',
+      'drag-node',
       'drag-canvas',
       'zoom-canvas',
       // 'click-select',
@@ -100,17 +100,32 @@ const graph = new G6.Graph({
     ],
   },
   layout: {
-    type: 'circular', //circular  dagre  concentric
-    startRadius: 250,
-    endRadius: 500,
-    angleRatio: 1,
-    // divisions:3,
-    //rankdir: 'LR',
-    //align: 'UL',
-    sortByCombo: true,
-    controlPoints: true,
-    nodesepFunc: () => 1,
-    ranksepFunc: () => 1,
+    pipes: [
+      {
+        type: 'circular', //circular  dagre  concentric
+        // 根据节点的某个字段判断是否属于该子图
+        nodesFilter: (node) => node.subGraphId === '0',
+        startRadius: 250,
+        endRadius: 500,
+        angleRatio: 1,
+        // divisions:3,
+        //rankdir: 'LR',
+        //align: 'UL',
+        sortByCombo: true,
+        controlPoints: true,
+        nodesepFunc: () => 1,
+        ranksepFunc: () => 1,
+      },
+      {
+        type: 'grid',
+        begin: [1000, 0],
+        // radius: 100,
+        // angleRatio: 0.5,
+        // startRadius: 500,
+        // endRadius: 250,
+        nodesFilter: (node) => node.subGraphId === '1',
+      },
+    ],
   },
   // animate: true, // Boolean，切换布局时是否使用动画过度，默认为 false
   // animateCfg: {
@@ -127,11 +142,12 @@ const graph = new G6.Graph({
     },
     labelCfg: {
       style: {
-        fill: '#9ec9ff',
+        fill: '#6395f9', //#6395f9  #9ec9ff
         fontSize: 12,
         background: {
           // fill: '#ffffff',
-          stroke: '#9EC9FF',
+          // fillOpacity: 0.8,
+          // stroke: '#9EC9FF',
           padding: [2, 2, 2, 2],
           radius: 2,
         },
@@ -198,7 +214,6 @@ graph.on('afterrender', (evt) => {
   //   graph.refreshPositions();
   //   //graph.updateCombos()
   // });
-
   // combos.forEach((combo, index) => {
   //   if (!combo || combo.destroyed || combo.getType() !== 'combo') return;
   //   // if (index) graph.collapseCombo(combo);
@@ -206,7 +221,6 @@ graph.on('afterrender', (evt) => {
   //   setTimeout(() => {
   //     combo.show();
   //   }, 100 * index);
-
   //   // graph.refreshPositions();
   //   //graph.updateCombos()
   // });

@@ -134,7 +134,7 @@ export default {
     // 动画地移动，并配置动画
     graph.focusItem(item, true, {
       easing: 'easeCubic',
-      duration: 400,
+      duration: 500,
     });
 
     const rEdges = item.getEdges();

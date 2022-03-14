@@ -35,13 +35,14 @@ export const data = {
     {
       id: '0',
       label: fittingString('0【基础】集合的概念与性质', 70, globalFontSize),
-
       comboId: 'A',
+      subGraphId: '0',
     },
     {
       id: '1',
       label: fittingString('1【基础】判断能否构成集合', 70, globalFontSize),
       comboId: 'A',
+      subGraphId: '0',
     },
     {
       id: '2',
@@ -51,21 +52,25 @@ export const data = {
         globalFontSize
       ),
       comboId: 'A',
+      subGraphId: '0',
     },
     {
       id: '3',
       label: fittingString('3判断元素与集合的关系', 70, globalFontSize),
       comboId: 'B',
+      subGraphId: '0',
     },
     {
       id: '4',
       label: fittingString('4根据元素与集合的关系求参数', 70, globalFontSize),
       comboId: 'B',
+      subGraphId: '0',
     },
     {
       id: '5',
       label: fittingString('5根据集合中元素的个数求参数', 70, globalFontSize),
       comboId: 'B',
+      subGraphId: '0',
     },
     // {
     //   id: '6',
@@ -76,21 +81,25 @@ export const data = {
       id: '7',
       label: fittingString('7求集合元素的个数', 70, globalFontSize),
       comboId: 'C',
+      subGraphId: '0',
     },
     {
       id: '8',
       label: fittingString('8集合元素互异性的应用', 70, globalFontSize),
       comboId: 'C',
+      subGraphId: '0',
     },
     {
       id: '9',
       label: fittingString('9描述法表示集合', 70, globalFontSize),
       comboId: 'D',
+      subGraphId: '0',
     },
     {
       id: '10',
       label: fittingString('10列举法表示集合', 70, globalFontSize),
       comboId: 'D',
+      subGraphId: '0',
     },
     // {
     //   id: '11',
@@ -101,60 +110,72 @@ export const data = {
       id: '12',
       label: fittingString('12求集合的子集与子集个数', 70, globalFontSize),
       comboId: 'E',
+      subGraphId: '0',
     },
     {
       id: '13',
       label: fittingString('13判断两个集合的包含关系', 70, globalFontSize),
       comboId: 'E',
+      subGraphId: '0',
     },
     {
       id: '14',
       label: fittingString('14根据集合的包含关系求参数', 70, globalFontSize),
       comboId: 'E',
+      subGraphId: '0',
     },
     {
       id: '15',
       label: fittingString('15集合相等与子集的关系', 70, globalFontSize),
       comboId: 'E',
+      subGraphId: '0',
     },
     {
       id: '16',
       label: fittingString('16空集的概念与性质', 70, globalFontSize),
+      subGraphId: '0',
     },
     {
       id: '17',
       label: fittingString('17交集的概念及运算', 70, globalFontSize),
       comboId: 'F',
+      subGraphId: '0',
     },
     {
       id: '18',
       label: fittingString('18根据交集结果逆向分析', 70, globalFontSize),
       comboId: 'F',
+      subGraphId: '0',
     },
     {
       id: '19',
       label: fittingString('19并集的概念及运算', 70, globalFontSize),
       comboId: 'F',
+      subGraphId: '0',
     },
     {
       id: '20',
       label: fittingString('20根据并集结果逆向分析', 70, globalFontSize),
       comboId: 'F',
+      subGraphId: '0',
     },
     {
       id: '21',
       label: fittingString('21补集、全集的概念及运算', 70, globalFontSize),
       comboId: 'F',
+      subGraphId: '0',
     },
     {
       id: '22',
       label: fittingString('22根据补集结果逆向分析', 70, globalFontSize),
       comboId: 'F',
+      subGraphId: '0',
     },
     {
       id: '23',
       label: fittingString('23集合的交并补混合运算', 70, globalFontSize),
       comboId: 'G',
+      subGraphId: '0',
     },
     {
       id: '24',
@@ -164,20 +185,49 @@ export const data = {
         globalFontSize
       ),
       comboId: 'G',
+      subGraphId: '0',
     },
     {
       id: '25',
       label: fittingString('25Venn图的基本应用', 70, globalFontSize),
       comboId: 'H',
+      subGraphId: '0',
     },
     {
       id: '26',
       label: fittingString('26容斥原理的应用', 70, globalFontSize),
       comboId: 'H',
+      subGraphId: '0',
+    },
+    {
+      id: '27',
+      label: fittingString('27集合中点集的包含关系', 70, globalFontSize),
+      subGraphId: '1',
     },
     {
       id: '28',
-      label: fittingString('27集合中的新定义问题', 70, globalFontSize),
+      label: fittingString('28描述法中整数集的包含关系', 70, globalFontSize),
+      subGraphId: '1',
+    },
+    {
+      id: '29',
+      label: fittingString('29一元一次不等式与集合', 70, globalFontSize),
+      subGraphId: '1',
+    },
+    {
+      id: '30',
+      label: fittingString('30集合运算中的二次方程问题', 70, globalFontSize),
+      subGraphId: '1',
+    },
+    {
+      id: '31',
+      label: fittingString('31集合运算与二次含餐不等式', 70, globalFontSize),
+      subGraphId: '1',
+    },
+    {
+      id: '32',
+      label: fittingString('32简单的绝对值不等式与集合', 70, globalFontSize),
+      subGraphId: '1',
     },
   ],
   edges: [
