@@ -133,10 +133,11 @@ export default {
     //添加动画
     graph.setItemState(item, activeState, true);
     // 动画地移动，并配置动画
-    graph.focusItem(item, true, {
-      easing: 'easeCubic',
-      duration: 500,
-    });
+    // graph.focusItem(item, true, {
+    //   easing: 'easeCubic',
+    //   duration: 500,
+    // });
+    graph.focusItem(item);
 
     const rEdges = item.getEdges();
     const rEdgeLegnth = rEdges.length;

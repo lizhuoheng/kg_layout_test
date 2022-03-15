@@ -46,6 +46,11 @@ data.nodes.forEach((node) => {
         // opacity: 0.1,
       },
     };
+    node.labelCfg = {
+      style: {
+        fill: '#72c054',
+      },
+    };
   } else if (node.userData.irtScore >= 6) {
     node.style = {
       fill: '#ffb034',
@@ -58,16 +63,26 @@ data.nodes.forEach((node) => {
         // opacity: 0.1,
       },
     };
+    node.labelCfg = {
+      style: {
+        fill: '#ffb034',
+      },
+    };
   } else if (node.userData.irtScore >= 0) {
     node.style = {
-      fill: '#e75a48',
+      fill: '#e12e12',
       stroke: '#aaa',
     };
     node.stateStyles = {
       active: {
-        fill: '#e75a48',
+        fill: '#e12e12',
         // stroke: '#aaa',
         // opacity: 0.1,
+      },
+    };
+    node.labelCfg = {
+      style: {
+        fill: '#e12e12',
       },
     };
   } else {
@@ -80,6 +95,11 @@ data.nodes.forEach((node) => {
         fill: '#cdcdcd',
         // stroke: '#aaa',
         // opacity: 0.1,
+      },
+    };
+    node.labelCfg = {
+      style: {
+        fill: '#aaaaaa',
       },
     };
   }
@@ -124,8 +144,8 @@ const graph = new G6.Graph({
   fitViewPadding: 30,
   modes: {
     default: [
-      'drag-combo',
-      'drag-node',
+      // 'drag-combo',
+      // 'drag-node',
       'drag-canvas',
       'zoom-canvas',
       // 'click-select',
@@ -179,11 +199,11 @@ const graph = new G6.Graph({
       },
     ],
   },
-  // animate: true, // Boolean，切换布局时是否使用动画过度，默认为 false
-  // animateCfg: {
-  //   duration: 1000, // Number，一次动画的时长
-  //   easing: 'easeCubic', // String，动画函数
-  // },
+  animate: true, // Boolean，切换布局时是否使用动画过度，默认为 false
+  animateCfg: {
+    duration: 500, // Number，一次动画的时长
+    easing: 'easeCubic', // String，动画函数
+  },
   // plugins: [tooltip], // 配置 Grid 插件和 Minimap 插件
   defaultNode: {
     size: 15,
@@ -218,7 +238,7 @@ const graph = new G6.Graph({
   defaultEdge: {
     //type: 'arc', //polyline
     size: 2,
-    color: '#f5f5f5',
+    color: '#f5f5f500',
     style: {
       endArrow: {
         path: 'M 0,0 L 8,3 L 8,-3 Z',
