@@ -33,6 +33,58 @@ import kgtooltip from './kg-tooltip';
 //   }
 // });
 
+data.nodes.forEach((node) => {
+  if (node.userData.irtScore >= 8) {
+    node.style = {
+      fill: '#72c054',
+      stroke: '#aaa',
+    };
+    node.stateStyles = {
+      active: {
+        fill: '#72c054',
+        // stroke: '#aaa',
+        // opacity: 0.1,
+      },
+    };
+  } else if (node.userData.irtScore >= 6) {
+    node.style = {
+      fill: '#ffb034',
+      stroke: '#aaa',
+    };
+    node.stateStyles = {
+      active: {
+        fill: '#ffb034',
+        // stroke: '#aaa',
+        // opacity: 0.1,
+      },
+    };
+  } else if (node.userData.irtScore >= 0) {
+    node.style = {
+      fill: '#e75a48',
+      stroke: '#aaa',
+    };
+    node.stateStyles = {
+      active: {
+        fill: '#e75a48',
+        // stroke: '#aaa',
+        // opacity: 0.1,
+      },
+    };
+  } else {
+    node.style = {
+      fill: '#cdcdcd',
+      stroke: '#aaa',
+    };
+    node.stateStyles = {
+      active: {
+        fill: '#cdcdcd',
+        // stroke: '#aaa',
+        // opacity: 0.1,
+      },
+    };
+  }
+});
+
 G6.registerBehavior('activate-knode', activateKnode);
 G6.registerBehavior('kg-tooltip', kgtooltip);
 
@@ -72,7 +124,7 @@ const graph = new G6.Graph({
   fitViewPadding: 30,
   modes: {
     default: [
-      // 'drag-combo',
+      'drag-combo',
       'drag-node',
       'drag-canvas',
       'zoom-canvas',
@@ -155,6 +207,14 @@ const graph = new G6.Graph({
       position: 'bottom',
     },
   },
+  // nodeStateStyles: {
+  //   active: {
+  //     lineWidth: 2,
+  //     // fill: '#009a44',
+  //     stroke: '#009a44',
+  //     // opacity: 0.1,
+  //   },
+  // },
   defaultEdge: {
     //type: 'arc', //polyline
     size: 2,
@@ -195,51 +255,45 @@ const graph = new G6.Graph({
   },
 });
 graph.data(data);
-const combos = graph.getCombos();
-combos.forEach((combo, index) => {
-  const hasSelected = combo.hasState('selected');
-  graph.setItemState(combo, 'visible ', false);
-});
+// const combos = graph.getCombos();
+// combos.forEach((combo, index) => {
+//   const hasSelected = combo.hasState('selected');
+//   graph.setItemState(combo, 'visible ', false);
+// });
 
 graph.render();
 
 //首次学习时，只展开第一个combo？？待定
-graph.on('afterrender', (evt) => {
-  // const combos = graph.getCombos();
-  // combos.forEach((combo, index) => {
-  //   if (!combo || combo.destroyed || combo.getType() !== 'combo') return;
-  //   if (index) graph.collapseCombo(combo);
-  //   // graph.setItemState(combo, 'visible ', false);
-  //   // combo.hide();
-  //   graph.refreshPositions();
-  //   //graph.updateCombos()
-  // });
-  // combos.forEach((combo, index) => {
-  //   if (!combo || combo.destroyed || combo.getType() !== 'combo') return;
-  //   // if (index) graph.collapseCombo(combo);
-  //   // graph.setItemState(combo, 'visible ', false);
-  //   setTimeout(() => {
-  //     combo.show();
-  //   }, 100 * index);
-  //   // graph.refreshPositions();
-  //   //graph.updateCombos()
-  // });
-});
+// graph.on('afterrender', (evt) => {
+// const combos = graph.getCombos();
+// combos.forEach((combo, index) => {
+//   if (!combo || combo.destroyed || combo.getType() !== 'combo') return;
+//   if (index) graph.collapseCombo(combo);
+//   // graph.setItemState(combo, 'visible ', false);
+//   // combo.hide();
+//   graph.refreshPositions();
+//   //graph.updateCombos()
+// });
+// combos.forEach((combo, index) => {
+//   if (!combo || combo.destroyed || combo.getType() !== 'combo') return;
+//   // if (index) graph.collapseCombo(combo);
+//   // graph.setItemState(combo, 'visible ', false);
+//   setTimeout(() => {
+//     combo.show();
+//   }, 100 * index);
+//   // graph.refreshPositions();
+//   //graph.updateCombos()
+// });
+// });
 
-// graph.on('node:click', (evt) => {
-//   // clearFocusItemState(graph);
-//   // clearFocusEdgeState(graph);
+// graph.on('afteractivaterelations', evt => {
 //   const { item } = evt;
-
-//   // highlight the clicked node, it is down by click-select
-//   graph.setItemState(item, 'focus', true);
-
-//     // 将相关边也高亮
-//     const relatedEdges = item.getEdges();
-//     relatedEdges.forEach((edge) => {
-//       graph.setItemState(edge, 'focus', true);
-//     });
-
+//   graph.updateItem(item, {
+//     // 节点的样式
+//     style: {
+//       stroke: 'green',
+//     },
+//   });
 // });
 
 if (typeof window !== 'undefined')

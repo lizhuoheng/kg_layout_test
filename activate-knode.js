@@ -4,7 +4,7 @@ export default {
       // 可选 mouseenter || click
       // 选择 click 会监听 touch，mouseenter 不会监听
       trigger: 'click',
-      activeState: 'selected', //active
+      activeState: 'active', //active
       // inactiveState: 'inactive',
       resetSelected: false,
       shouldUpdate() {
@@ -130,6 +130,7 @@ export default {
     if (inactiveState) {
       graph.setItemState(item, inactiveState, false);
     }
+    //添加动画
     graph.setItemState(item, activeState, true);
     // 动画地移动，并配置动画
     graph.focusItem(item, true, {

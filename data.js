@@ -37,12 +37,22 @@ export const data = {
       label: fittingString('0【基础】集合的概念与性质', 70, globalFontSize),
       comboId: 'A',
       subGraphId: '0',
+      userData: {
+        cttCorr: 0.76,
+        irtScore: 7.69,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '1',
       label: fittingString('1【基础】判断能否构成集合', 70, globalFontSize),
       comboId: 'A',
       subGraphId: '0',
+      userData: {
+        cttCorr: 0.43,
+        irtScore: 5.59,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '2',
@@ -53,24 +63,44 @@ export const data = {
       ),
       comboId: 'A',
       subGraphId: '0',
+      userData: {
+        cttCorr: 0.57,
+        irtScore: 6.35,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '3',
       label: fittingString('3判断元素与集合的关系', 70, globalFontSize),
       comboId: 'B',
       subGraphId: '0',
+      userData: {
+        cttCorr: 0.83,
+        irtScore: 8.64,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '4',
       label: fittingString('4根据元素与集合的关系求参数', 70, globalFontSize),
       comboId: 'B',
       subGraphId: '0',
+      userData: {
+        cttCorr: 0.17,
+        irtScore: 2.31,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '5',
       label: fittingString('5根据集合中元素的个数求参数', 70, globalFontSize),
       comboId: 'B',
       subGraphId: '0',
+      userData: {
+        cttCorr: 0.38,
+        irtScore: 3.27,
+        irtScorePredict: -1,
+      },
     },
     // {
     //   id: '6',
@@ -82,24 +112,44 @@ export const data = {
       label: fittingString('7求集合元素的个数', 70, globalFontSize),
       comboId: 'C',
       subGraphId: '0',
+      userData: {
+        cttCorr: 0.92,
+        irtScore: 9.67,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '8',
       label: fittingString('8集合元素互异性的应用', 70, globalFontSize),
       comboId: 'C',
       subGraphId: '0',
+      userData: {
+        cttCorr: -1,
+        irtScore: -1,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '9',
       label: fittingString('9描述法表示集合', 70, globalFontSize),
       comboId: 'D',
       subGraphId: '0',
+      userData: {
+        cttCorr: -1,
+        irtScore: -1,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '10',
       label: fittingString('10列举法表示集合', 70, globalFontSize),
       comboId: 'D',
       subGraphId: '0',
+      userData: {
+        cttCorr: -1,
+        irtScore: -1,
+        irtScorePredict: -1,
+      },
     },
     // {
     //   id: '11',
@@ -111,71 +161,131 @@ export const data = {
       label: fittingString('12求集合的子集与子集个数', 70, globalFontSize),
       comboId: 'E',
       subGraphId: '0',
+      userData: {
+        cttCorr: -1,
+        irtScore: -1,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '13',
       label: fittingString('13判断两个集合的包含关系', 70, globalFontSize),
       comboId: 'E',
       subGraphId: '0',
+      userData: {
+        cttCorr: -1,
+        irtScore: -1,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '14',
       label: fittingString('14根据集合的包含关系求参数', 70, globalFontSize),
       comboId: 'E',
       subGraphId: '0',
+      userData: {
+        cttCorr: -1,
+        irtScore: -1,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '15',
       label: fittingString('15集合相等与子集的关系', 70, globalFontSize),
       comboId: 'E',
       subGraphId: '0',
+      userData: {
+        cttCorr: -1,
+        irtScore: -1,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '16',
       label: fittingString('16空集的概念与性质', 70, globalFontSize),
       subGraphId: '0',
+      userData: {
+        cttCorr: -1,
+        irtScore: -1,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '17',
       label: fittingString('17交集的概念及运算', 70, globalFontSize),
       comboId: 'F',
       subGraphId: '0',
+      userData: {
+        cttCorr: -1,
+        irtScore: -1,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '18',
       label: fittingString('18根据交集结果逆向分析', 70, globalFontSize),
       comboId: 'F',
       subGraphId: '0',
+      userData: {
+        cttCorr: -1,
+        irtScore: -1,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '19',
       label: fittingString('19并集的概念及运算', 70, globalFontSize),
       comboId: 'F',
       subGraphId: '0',
+      userData: {
+        cttCorr: -1,
+        irtScore: -1,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '20',
       label: fittingString('20根据并集结果逆向分析', 70, globalFontSize),
       comboId: 'F',
       subGraphId: '0',
+      userData: {
+        cttCorr: -1,
+        irtScore: -1,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '21',
       label: fittingString('21补集、全集的概念及运算', 70, globalFontSize),
       comboId: 'F',
       subGraphId: '0',
+      userData: {
+        cttCorr: -1,
+        irtScore: -1,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '22',
       label: fittingString('22根据补集结果逆向分析', 70, globalFontSize),
       comboId: 'F',
       subGraphId: '0',
+      userData: {
+        cttCorr: -1,
+        irtScore: -1,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '23',
       label: fittingString('23集合的交并补混合运算', 70, globalFontSize),
       comboId: 'G',
       subGraphId: '0',
+      userData: {
+        cttCorr: -1,
+        irtScore: -1,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '24',
@@ -186,48 +296,99 @@ export const data = {
       ),
       comboId: 'G',
       subGraphId: '0',
+      userData: {
+        cttCorr: -1,
+        irtScore: -1,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '25',
       label: fittingString('25Venn图的基本应用', 70, globalFontSize),
       comboId: 'H',
       subGraphId: '0',
+      userData: {
+        cttCorr: -1,
+        irtScore: -1,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '26',
       label: fittingString('26容斥原理的应用', 70, globalFontSize),
       comboId: 'H',
       subGraphId: '0',
+      userData: {
+        cttCorr: -1,
+        irtScore: -1,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '27',
       label: fittingString('27集合中点集的包含关系', 70, globalFontSize),
+      comboId: 'I',
       subGraphId: '1',
+      userData: {
+        cttCorr: -1,
+        irtScore: -1,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '28',
       label: fittingString('28描述法中整数集的包含关系', 70, globalFontSize),
+      comboId: 'I',
       subGraphId: '1',
+      userData: {
+        cttCorr: -1,
+        irtScore: -1,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '29',
       label: fittingString('29一元一次不等式与集合', 70, globalFontSize),
+      comboId: 'I',
       subGraphId: '1',
+      userData: {
+        cttCorr: -1,
+        irtScore: -1,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '30',
       label: fittingString('30集合运算中的二次方程问题', 70, globalFontSize),
+      comboId: 'I',
       subGraphId: '1',
+      userData: {
+        cttCorr: -1,
+        irtScore: -1,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '31',
-      label: fittingString('31集合运算与二次含餐不等式', 70, globalFontSize),
+      label: fittingString('31集合运算与二次含参不等式', 70, globalFontSize),
+      comboId: 'I',
       subGraphId: '1',
+      userData: {
+        cttCorr: -1,
+        irtScore: -1,
+        irtScorePredict: -1,
+      },
     },
     {
       id: '32',
       label: fittingString('32简单的绝对值不等式与集合', 70, globalFontSize),
+      comboId: 'I',
       subGraphId: '1',
+      userData: {
+        cttCorr: -1,
+        irtScore: -1,
+        irtScorePredict: -1,
+      },
     },
   ],
   edges: [
@@ -354,6 +515,26 @@ export const data = {
       source: '25',
       target: '26',
     },
+    {
+      source: '13',
+      target: '27',
+    },
+    {
+      source: '13',
+      target: '28',
+    },
+    {
+      source: '23',
+      target: '30',
+    },
+    {
+      source: '23',
+      target: '31',
+    },
+    {
+      source: '23',
+      target: '32',
+    },
   ],
   combos: [
     {
@@ -415,6 +596,14 @@ export const data = {
     {
       id: 'H',
       label: 'Venn图',
+      style: {
+        // stroke: '#99C0ED',
+        // fill: '#99C0ED',
+      },
+    },
+    {
+      id: 'I',
+      label: '专题综合',
       style: {
         // stroke: '#99C0ED',
         // fill: '#99C0ED',

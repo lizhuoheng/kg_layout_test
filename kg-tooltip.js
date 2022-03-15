@@ -6,7 +6,21 @@ export default {
       item: 'node',
       offset: 15,
       formatText(model) {
-        const text = 'ID: ' + model.id + '<br> Label: ' + model.label;
+        const text =
+          'ID: ' +
+          model.id +
+          '<br> Label: ' +
+          model.label +
+          '<br> comboId: ' +
+          model.comboId +
+          '<br> subGraphId: ' +
+          model.subGraphId +
+          '<br> cttCorr: ' +
+          model.userData.cttCorr +
+          '<br> irtScore: ' +
+          model.userData.irtScore +
+          '<br> irtScorePredict: ' +
+          model.userData.irtScorePredict;
         return text;
       },
       // shouldBegin(e) {
@@ -84,7 +98,8 @@ export default {
       this.container = container;
     }
     const text = this.formatText(e.item.get('model'), e);
-    container.innerHTML = text;
+    container.innerHTML =
+      text + '<div><button>学习</button><button>练习</button></div>';
     modifyCSS(this.container, { visibility: 'visible' });
     this.updatePosition(e);
   },
