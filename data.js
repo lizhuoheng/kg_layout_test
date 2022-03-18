@@ -508,8 +508,24 @@ export const data = {
       target: '25',
     },
     {
-      source: '23',
+      source: '17',
       target: '25',
+    },
+    {
+      source: '19',
+      target: '25',
+    },
+    {
+      source: '21',
+      target: '25',
+    },
+    {
+      source: '25',
+      target: '23',
+    },
+    {
+      source: '23',
+      target: '26',
     },
     {
       source: '25',
@@ -521,6 +537,10 @@ export const data = {
     },
     {
       source: '13',
+      target: '28',
+    },
+    {
+      source: '9',
       target: '28',
     },
     {
@@ -540,6 +560,7 @@ export const data = {
     {
       id: 'A',
       label: '集合的概念',
+      parentId: 'C',
       style: {
         // fill: '#C4E3B2',
         // stroke: '#C4E3B2',
@@ -548,6 +569,7 @@ export const data = {
     {
       id: 'B',
       label: '元素与集合',
+      parentId: 'A',
       style: {
         // stroke: '#99C0ED',
         // fill: '#99C0ED',

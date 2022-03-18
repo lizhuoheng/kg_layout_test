@@ -1,3 +1,26 @@
+import { each } from '@antv/util';
+
+/**
+ * 遍历 Combo 下的所有 Combo
+ * @param data 指定的 Combo
+ * @param fn
+ */
+const traverseCombo = (data, fn) => {
+  if (fn(data) === false) {
+    return;
+  }
+
+  if (data) {
+    const combos = data.get('combos');
+    if (combos.length === 0) {
+      return false;
+    }
+    each(combos, (child) => {
+      traverseCombo(child, fn);
+    });
+  }
+};
+
 export default {
   getDefaultCfg() {
     return {
@@ -69,6 +92,7 @@ export default {
     const item = e.item;
     const graph = this.graph;
     this.item = item;
+    this.currentItemChildCombos = [];
     if (!this.shouldUpdate(e.item, { event: e, action: 'activate' })) {
       return;
     }
@@ -130,8 +154,26 @@ export default {
     if (inactiveState) {
       graph.setItemState(item, inactiveState, false);
     }
+
+    //激活Combo中的所有Node
+    if (item.getType() === 'combo') {
+      graph.setItemState(item, activeState, true);
+      traverseCombo(item, (param) => {
+        if (param.destroyed) {
+          return false;
+        }
+        //激活Combo（param）下所有的Node
+        const childNodes = param.getNodes();
+        each(childNodes, (item) => {
+          graph.setItemState(item, activeState, true);
+        });
+        return true;
+      });
+    } else {
+      graph.setItemState(item, activeState, true);
+    }
+
     //添加动画
-    graph.setItemState(item, activeState, true);
     // 动画地移动，并配置动画
     // graph.focusItem(item, true, {
     //   easing: 'easeCubic',

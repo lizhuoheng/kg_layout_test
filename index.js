@@ -48,7 +48,7 @@ data.nodes.forEach((node) => {
     };
     node.labelCfg = {
       style: {
-        fill: '#72c054',
+        fill: '#82c246',
       },
     };
   } else if (node.userData.irtScore >= 6) {
@@ -70,19 +70,19 @@ data.nodes.forEach((node) => {
     };
   } else if (node.userData.irtScore >= 0) {
     node.style = {
-      fill: '#e12e12',
+      fill: '#e94e52',
       stroke: '#aaa',
     };
     node.stateStyles = {
       active: {
-        fill: '#e12e12',
+        fill: '#e94e52',
         // stroke: '#aaa',
         // opacity: 0.1,
       },
     };
     node.labelCfg = {
       style: {
-        fill: '#e12e12',
+        fill: '#ec897d',
       },
     };
   } else {
@@ -106,7 +106,7 @@ data.nodes.forEach((node) => {
 });
 
 G6.registerBehavior('activate-knode', activateKnode);
-G6.registerBehavior('kg-tooltip', kgtooltip);
+// G6.registerBehavior('kg-tooltip', kgtooltip);
 
 const container = document.getElementById('container');
 const width = container.scrollWidth;
@@ -140,6 +140,8 @@ const graph = new G6.Graph({
   renderer: 'canvas', // svg  canvas
   width,
   height,
+  // 必须将 groupByTypes 设置为 false，带有 combo 的图中元素的视觉层级才能合理
+  groupByTypes: false,
   fitView: true,
   fitViewPadding: 30,
   modes: {
@@ -160,7 +162,7 @@ const graph = new G6.Graph({
       //   trigger: 'click',
       //   resetSelected: true,
       // },
-      'kg-tooltip',
+      // 'kg-tooltip',
       // {
       //   type: 'kg-tooltip',
       //   formatText(model) {
@@ -206,7 +208,7 @@ const graph = new G6.Graph({
   },
   // plugins: [tooltip], // 配置 Grid 插件和 Minimap 插件
   defaultNode: {
-    size: 15,
+    size: 16,
     style: {
       lineWidth: 1,
       stroke: '#5B8FF9',
@@ -238,11 +240,11 @@ const graph = new G6.Graph({
   defaultEdge: {
     //type: 'arc', //polyline
     size: 2,
-    color: '#f5f5f500',
+    color: '#f5f5f566',
     style: {
       endArrow: {
         path: 'M 0,0 L 8,3 L 8,-3 Z',
-        fill: '#f5f5f5',
+        fill: '#f5f5f566',
         // path: G6.Arrow.vee(10, -20, 10), // 内置箭头，参数为箭头宽度、长度、偏移量 d（默认为 0）
         // d: 10 // 偏移量
       },
@@ -269,6 +271,7 @@ const graph = new G6.Graph({
     },
     labelCfg: {
       style: {
+        fill: '#313131',
         fontSize: 20,
       },
     },
