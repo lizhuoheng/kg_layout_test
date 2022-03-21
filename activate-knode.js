@@ -30,6 +30,7 @@ export default {
       activeState: 'active', //active
       // inactiveState: 'inactive',
       resetSelected: false,
+      autoFocus: true,
       shouldUpdate() {
         return true;
       },
@@ -173,13 +174,11 @@ export default {
       graph.setItemState(item, activeState, true);
     }
 
-    //添加动画
-    // 动画地移动，并配置动画
-    // graph.focusItem(item, true, {
-    //   easing: 'easeCubic',
-    //   duration: 500,
-    // });
-    graph.focusItem(item);
+    //添加focus动画
+    if (this.get('autoFocus')) {
+      graph.focusItem(item);
+      // graph.zoomTo(0.6, { x: 0, y: 0 }, true);
+    }
 
     const rEdges = item.getEdges();
     const rEdgeLegnth = rEdges.length;

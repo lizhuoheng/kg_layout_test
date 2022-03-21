@@ -148,7 +148,12 @@ const graph = new G6.Graph({
     default: [
       // 'drag-combo',
       // 'drag-node',
-      'drag-canvas',
+      // 'drag-canvas',
+      {
+        type: 'drag-canvas',
+        enableOptimize: true, // 拖动 canvas 过程中隐藏所有的边及label
+        allowDragOnItem: true,
+      },
       'zoom-canvas',
       // 'click-select',
       'activate-knode',
@@ -240,11 +245,11 @@ const graph = new G6.Graph({
   defaultEdge: {
     //type: 'arc', //polyline
     size: 2,
-    color: '#f5f5f566',
+    color: '#f5f5f590',
     style: {
       endArrow: {
         path: 'M 0,0 L 8,3 L 8,-3 Z',
-        fill: '#f5f5f566',
+        fill: '#f5f5f5',
         // path: G6.Arrow.vee(10, -20, 10), // 内置箭头，参数为箭头宽度、长度、偏移量 d（默认为 0）
         // d: 10 // 偏移量
       },
@@ -264,10 +269,19 @@ const graph = new G6.Graph({
       position: 'bottom',
     },
   },
+  edgeStateStyles: {
+    active: {
+      // color: '#5f95ff66',
+      opacity: 0.7,
+    },
+  },
   defaultCombo: {
     type: 'circle', // rect  circle
     style: {
       fillOpacity: 0.1,
+      // lineWidth: 1,
+      // stroke: '#5B8FF9',
+      fill: '#C6E5FF',
     },
     labelCfg: {
       style: {

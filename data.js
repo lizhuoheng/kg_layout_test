@@ -555,12 +555,16 @@ export const data = {
       source: '23',
       target: '32',
     },
+    {
+      source: 'A',
+      target: '32',
+    },
   ],
   combos: [
     {
       id: 'A',
       label: '集合的概念',
-      parentId: 'C',
+      // parentId: 'C',
       style: {
         // fill: '#C4E3B2',
         // stroke: '#C4E3B2',
@@ -569,7 +573,7 @@ export const data = {
     {
       id: 'B',
       label: '元素与集合',
-      parentId: 'A',
+      // parentId: 'A',
       style: {
         // stroke: '#99C0ED',
         // fill: '#99C0ED',
