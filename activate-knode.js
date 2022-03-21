@@ -21,6 +21,18 @@ const traverseCombo = (data, fn) => {
   }
 };
 
+/**
+ * 计算如果要把指定item缩放到图中心的话，对应的zoom center坐标
+ * @param zoomValeu 指定的绝对缩放值
+ * @param item 指定的item
+ */
+const getzoomCenter = (zoomValue, currentZoom, gcPoint, itemPoint) => {
+  const ratio = currentZoom / (zoomValue - currentZoom);
+  const zCenterX = (1 + ratio) * itemPoint.x - ratio * gcPoint.x;
+  const zCenterY = (1 + ratio) * itemPoint.y - ratio * gcPoint.y;
+  return { x: zCenterX, y: zCenterY };
+};
+
 export default {
   getDefaultCfg() {
     return {
@@ -176,8 +188,33 @@ export default {
 
     //添加focus动画
     if (this.get('autoFocus')) {
-      graph.focusItem(item);
+      // graph.focusItem(item);
       // graph.zoomTo(0.6, { x: 0, y: 0 }, true);
+      const currentZoom = graph.getZoom();
+      const zoomValue = 0.6;
+      if (currentZoom === zoomValue) {
+        graph.focusItem(item);
+      } else {
+        // const gcPoint = graph.getGraphCenterPoint();
+        const gcPoint = {
+          x: graph.get('width') / 2,
+          y: graph.get('height') / 2,
+        };
+
+        const itemPoint = { x: e.canvasX, y: e.canvasY };
+        // const canvas = this.graph.get('canvas');
+        // const itemPoint = canvas.getPointByClient(e.clientX, e.clientY);
+
+        // const group = item.get('group');
+        // let matrix = group.getMatrix();
+        // if (!matrix) matrix = [1, 0, 0, 0, 1, 0, 0, 0, 1];
+        // const itemPoint = graph.getCanvasByPoint(matrix[6], matrix[7]);
+        graph.zoomTo(
+          zoomValue,
+          getzoomCenter(zoomValue, currentZoom, gcPoint, itemPoint),
+          true
+        );
+      }
     }
 
     const rEdges = item.getEdges();
