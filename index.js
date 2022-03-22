@@ -146,13 +146,13 @@ const graph = new G6.Graph({
   fitViewPadding: 30,
   modes: {
     default: [
-      // 'drag-combo',
-      // 'drag-node',
+      'drag-combo',
+      'drag-node',
       // 'drag-canvas',
       {
         type: 'drag-canvas',
         enableOptimize: true, // 拖动 canvas 过程中隐藏所有的边及label
-        allowDragOnItem: true,
+        // allowDragOnItem: true,
       },
       'zoom-canvas',
       // 'click-select',

@@ -59,6 +59,7 @@ export default {
     }
     return {
       'node:click': 'setAllItemStates',
+      'node:dblclick': 'inspectItem',
       'combo:click': 'setAllItemStates',
       'canvas:click': 'clearActiveState',
       'node:touchstart': 'setOnTouchStart',
@@ -191,8 +192,8 @@ export default {
       // graph.focusItem(item);
       // graph.zoomTo(0.6, { x: 0, y: 0 }, true);
       const currentZoom = graph.getZoom();
-      const zoomValue = 0.6;
-      if (currentZoom === zoomValue) {
+      const zoomValue = 0.8;
+      if (Math.abs(currentZoom - zoomValue) < 0.01) {
         graph.focusItem(item);
       } else {
         // const gcPoint = graph.getGraphCenterPoint();
@@ -280,6 +281,97 @@ export default {
       item: e.item || self.get('item'),
       action: 'deactivate',
     });
+  },
+
+  //inspectItem 只显示item和与它直接关联的其它节点
+  inspectItem(e) {
+    const item = e.item;
+    const graph = this.graph;
+    this.item = item;
+    this.currentItemChildCombos = [];
+    // if (!this.shouldUpdate(e.item, { event: e, action: 'activate' })) {
+    //   return;
+    // }
+    const self = this;
+    const activeState = this.activeState;
+    const inactiveState = this.inactiveState;
+    const nodes = graph.getNodes();
+    const combos = graph.getCombos();
+    const edges = graph.getEdges();
+    const vEdges = graph.get('vedges');
+    const nodeLength = nodes.length;
+    const comboLength = combos.length;
+    const edgeLength = edges.length;
+    const vEdgeLength = vEdges.length;
+
+    for (let i = 0; i < nodeLength; i++) {
+      const node = nodes[i];
+      node.hide();
+    }
+    for (let i = 0; i < comboLength; i++) {
+      const combo = combos[i];
+      combo.hide();
+    }
+
+    for (let i = 0; i < edgeLength; i++) {
+      const edge = edges[i];
+      edge.hide();
+    }
+
+    for (let i = 0; i < vEdgeLength; i++) {
+      const vEdge = vEdges[i];
+      vEdge.hide();
+    }
+
+    if (inactiveState) {
+      graph.setItemState(item, inactiveState, false);
+    }
+
+    graph.setItemState(item, activeState, true);
+    item.show();
+
+    //添加focus动画
+    if (this.get('autoFocus')) {
+      const currentZoom = graph.getZoom();
+      const zoomValue = 0.8;
+      if (Math.abs(currentZoom - zoomValue) < 0.01) {
+        graph.focusItem(item);
+      } else {
+        // const gcPoint = graph.getGraphCenterPoint();
+        const gcPoint = {
+          x: graph.get('width') / 2,
+          y: graph.get('height') / 2,
+        };
+        const itemPoint = { x: e.canvasX, y: e.canvasY };
+        graph.zoomTo(
+          zoomValue,
+          getzoomCenter(zoomValue, currentZoom, gcPoint, itemPoint),
+          true
+        );
+      }
+    }
+
+    const rEdges = item.getEdges();
+    const rEdgeLegnth = rEdges.length;
+    for (let i = 0; i < rEdgeLegnth; i++) {
+      const edge = rEdges[i];
+      edge.show();
+      let otherEnd;
+      if (edge.getSource() === item) {
+        otherEnd = edge.getTarget();
+      } else {
+        otherEnd = edge.getSource();
+      }
+      if (inactiveState) {
+        graph.setItemState(otherEnd, inactiveState, false);
+      }
+      otherEnd.show();
+      // graph.setItemState(otherEnd, activeState, true);
+      // graph.setItemState(edge, inactiveState, false);
+      // graph.setItemState(edge, activeState, true);
+      // edge.toFront();
+    }
+    // graph.emit('afteractivaterelations', { item: e.item, action: 'activate' });
   },
 
   // onNodeClick(e) {
