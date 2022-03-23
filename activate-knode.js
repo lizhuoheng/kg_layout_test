@@ -42,7 +42,7 @@ export default {
       activeState: 'active', //active
       // inactiveState: 'inactive',
       resetSelected: false,
-      autoFocus: true,
+      autoFocus: false,
       shouldUpdate() {
         return true;
       },
@@ -231,7 +231,7 @@ export default {
       if (inactiveState) {
         graph.setItemState(otherEnd, inactiveState, false);
       }
-      graph.setItemState(otherEnd, activeState, true);
+      // graph.setItemState(otherEnd, activeState, true);
       graph.setItemState(edge, inactiveState, false);
       graph.setItemState(edge, activeState, true);
       edge.toFront();
@@ -307,55 +307,43 @@ export default {
     for (let i = 0; i < nodeLength; i++) {
       const node = nodes[i];
       node.hide();
+      graph.setItemState(node, activeState, false);
+      graph.setItemState(node, 'selected', false);
     }
     for (let i = 0; i < comboLength; i++) {
       const combo = combos[i];
       combo.hide();
+      graph.setItemState(combo, activeState, false);
     }
 
     for (let i = 0; i < edgeLength; i++) {
       const edge = edges[i];
       edge.hide();
+      graph.setItemState(edge, activeState, false);
     }
 
     for (let i = 0; i < vEdgeLength; i++) {
       const vEdge = vEdges[i];
       vEdge.hide();
+      graph.setItemState(vEdge, activeState, false);
     }
 
     if (inactiveState) {
       graph.setItemState(item, inactiveState, false);
     }
 
-    graph.setItemState(item, activeState, true);
+    // graph.setItemState(item, activeState, true);
+    graph.setItemState(item, 'selected', true);
     item.show();
-
-    //添加focus动画
-    if (this.get('autoFocus')) {
-      const currentZoom = graph.getZoom();
-      const zoomValue = 0.8;
-      if (Math.abs(currentZoom - zoomValue) < 0.01) {
-        graph.focusItem(item);
-      } else {
-        // const gcPoint = graph.getGraphCenterPoint();
-        const gcPoint = {
-          x: graph.get('width') / 2,
-          y: graph.get('height') / 2,
-        };
-        const itemPoint = { x: e.canvasX, y: e.canvasY };
-        graph.zoomTo(
-          zoomValue,
-          getzoomCenter(zoomValue, currentZoom, gcPoint, itemPoint),
-          true
-        );
-      }
-    }
 
     const rEdges = item.getEdges();
     const rEdgeLegnth = rEdges.length;
     for (let i = 0; i < rEdgeLegnth; i++) {
       const edge = rEdges[i];
       edge.show();
+      graph.setItemState(edge, inactiveState, false);
+      graph.setItemState(edge, activeState, true);
+      // edge.toFront();
       let otherEnd;
       if (edge.getSource() === item) {
         otherEnd = edge.getTarget();
@@ -367,11 +355,72 @@ export default {
       }
       otherEnd.show();
       // graph.setItemState(otherEnd, activeState, true);
-      // graph.setItemState(edge, inactiveState, false);
-      // graph.setItemState(edge, activeState, true);
-      // edge.toFront();
     }
-    // graph.emit('afteractivaterelations', { item: e.item, action: 'activate' });
+
+    const CenterPoint = graph.getViewPortCenterPoint();
+    graph.updateLayout({
+      type: 'custom-centric',
+      focusNode: item,
+      center: [ CenterPoint.x, CenterPoint.y], // 可选，
+      radius: 150,
+      // // linkDistance: 100, // 可选，边长
+      // preventOverlap: true, // 可选，必须配合 nodeSize
+      // nodeSize: 80, // 可选
+      // // sweep: 10, // 可选
+      // equidistant: false, // 可选
+      // // startAngle: 0, // 可选
+      
+    });
+
+    graph.zoomTo(0.7,{
+        x: graph.get('width') / 2,
+        y: graph.get('height') / 2,
+      });
+    // graph.fitView();
+    // graph.focusItem(item);
+    // const currentZoom = graph.getZoom();
+    // const zoomValue = 0.9;
+    // if (Math.abs(currentZoom - zoomValue) < 0.01) {
+    //   // graph.fitCenter();
+    // }else{
+    //   graph.fitCenter();
+    //   graph.zoomTo(zoomValue,'', true);
+    // };
+   
+    // const group = item.get('group');
+    // let matrix = group.getMatrix();
+    // if (!matrix) matrix = [1, 0, 0, 0, 1, 0, 0, 0, 1];
+    // // const itemPoint = { x: e.canvasX, y: e.canvasY };
+    // const itemPoint = graph.getCanvasByPoint(matrix[6], matrix[7]);
+    // // const gcPoint = graph.getGraphCenterPoint();
+    // // const gcPoint = graph.getViewPortCenterPoint();
+    // // itemPoint = graph.getPointByCanvas(e.canvasX, e.canvasY)
+    // const gcPoint = {
+    //   x: graph.get('width') / 2,
+    //   y: graph.get('height') / 2,
+    // };
+    // console.log('item-matrix: ', matrix);
+    // console.log('item-e.canvas:', e.canvasX, e.canvasY);
+    // console.log('getViewPortCenterPoint', graph.getViewPortCenterPoint());
+    // console.log('ViewPortCenterPoint-Canvas', graph.getCanvasByPoint(graph.getViewPortCenterPoint().x, graph.getViewPortCenterPoint().y));
+    // console.log('getGraphCenterPoint', graph.getGraphCenterPoint());
+    // console.log('graph-width-height:',graph.get('width'), graph.get('height'))
+
+    // const currentZoom = graph.getZoom();
+    // const zoomValue = 0.9;
+    // if (Math.abs(currentZoom - zoomValue) < 0.01) {
+    //   graph.focusItem(item);
+    //   // graph.moveTo(gcPoint.x - itemPoint.x, gcPoint.y - itemPoint.y, true);
+    //   // graph.moveTo( itemPoint.x - gcPoint.x, itemPoint.y - gcPoint.y, true);
+    // } else {
+    //   graph.zoomTo(
+    //     zoomValue,
+    //     getzoomCenter(zoomValue, currentZoom, gcPoint, itemPoint),
+    //     true
+    //   );
+    //   // graph.focusItem(item);
+    //   // graph.emit('afteractivaterelations', { item: e.item, action: 'activate' });
+    // }
   },
 
   // onNodeClick(e) {

@@ -1,6 +1,7 @@
 import G6 from '@antv/g6';
 import { data } from './data';
 import activateKnode from './activate-knode';
+import customCentric from './custom-centric';
 import kgtooltip from './kg-tooltip';
 // import { GraphLayoutPredict } from '@antv/vis-predict-engine';
 
@@ -107,6 +108,7 @@ data.nodes.forEach((node) => {
 
 G6.registerBehavior('activate-knode', activateKnode);
 // G6.registerBehavior('kg-tooltip', kgtooltip);
+G6.registerLayout('custom-centric', customCentric);
 
 const container = document.getElementById('container');
 const width = container.scrollWidth;
@@ -273,6 +275,10 @@ const graph = new G6.Graph({
     active: {
       // color: '#5f95ff66',
       opacity: 0.7,
+      endArrow: {
+        path: 'M 0,0 L 8,3 L 8,-3 Z',
+        fill: '#5f95ff66',
+      },
     },
   },
   defaultCombo: {
