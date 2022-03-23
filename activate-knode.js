@@ -23,7 +23,7 @@ const traverseCombo = (data, fn) => {
 
 /**
  * 计算如果要把指定item缩放到图中心的话，对应的zoom center坐标
- * @param zoomValeu 指定的绝对缩放值
+ * @param zoomValue 指定的绝对缩放值
  * @param item 指定的item
  */
 const getzoomCenter = (zoomValue, currentZoom, gcPoint, itemPoint) => {
@@ -357,99 +357,52 @@ export default {
       // graph.setItemState(otherEnd, activeState, true);
     }
 
-    const CenterPoint = graph.getViewPortCenterPoint();
-    graph.updateLayout({
-      type: 'custom-centric',
-      focusNode: item,
-      center: [ CenterPoint.x, CenterPoint.y], // 可选，
-      radius: 150,
-      // // linkDistance: 100, // 可选，边长
-      // preventOverlap: true, // 可选，必须配合 nodeSize
-      // nodeSize: 80, // 可选
-      // // sweep: 10, // 可选
-      // equidistant: false, // 可选
-      // // startAngle: 0, // 可选
-      
-    });
-
-    graph.zoomTo(0.7,{
+    const currentZoom = graph.getZoom();
+    const zoomValue = 1;
+    if (Math.abs(currentZoom - zoomValue) < 0.01) {
+      graph.focusItem(item);
+    } else {
+      // const gcPoint = graph.getGraphCenterPoint();
+      const gcPoint = {
         x: graph.get('width') / 2,
         y: graph.get('height') / 2,
-      });
-    // graph.fitView();
-    // graph.focusItem(item);
-    // const currentZoom = graph.getZoom();
-    // const zoomValue = 0.9;
-    // if (Math.abs(currentZoom - zoomValue) < 0.01) {
-    //   // graph.fitCenter();
-    // }else{
-    //   graph.fitCenter();
-    //   graph.zoomTo(zoomValue,'', true);
-    // };
-   
-    // const group = item.get('group');
-    // let matrix = group.getMatrix();
-    // if (!matrix) matrix = [1, 0, 0, 0, 1, 0, 0, 0, 1];
-    // // const itemPoint = { x: e.canvasX, y: e.canvasY };
-    // const itemPoint = graph.getCanvasByPoint(matrix[6], matrix[7]);
-    // // const gcPoint = graph.getGraphCenterPoint();
-    // // const gcPoint = graph.getViewPortCenterPoint();
-    // // itemPoint = graph.getPointByCanvas(e.canvasX, e.canvasY)
-    // const gcPoint = {
-    //   x: graph.get('width') / 2,
-    //   y: graph.get('height') / 2,
-    // };
+      };
+      const itemPoint = { x: e.canvasX, y: e.canvasY };
+      graph.zoomTo(
+        zoomValue,
+        getzoomCenter(zoomValue, currentZoom, gcPoint, itemPoint),
+        true
+      );
+    }
+
+    // const CenterPoint = graph.getViewPortCenterPoint();
+    // graph.updateLayout({
+    //   pipes: [
+    //     {
+    //       type: 'custom-centric',
+    //       // nodesFilter: (node) => node.subGraphId ,
+    //       focusNode: item,
+    //       center: [CenterPoint.x, CenterPoint.y], // 可选，
+    //       radius: 150,
+    //     },
+    //   ],
+    // });
+
+    // graph.zoomTo(
+    //   1,
+    //   {
+    //     x: graph.get('width') / 2,
+    //     y: graph.get('height') / 2,
+    //   },
+    //   true
+    // );
+
     // console.log('item-matrix: ', matrix);
     // console.log('item-e.canvas:', e.canvasX, e.canvasY);
     // console.log('getViewPortCenterPoint', graph.getViewPortCenterPoint());
     // console.log('ViewPortCenterPoint-Canvas', graph.getCanvasByPoint(graph.getViewPortCenterPoint().x, graph.getViewPortCenterPoint().y));
     // console.log('getGraphCenterPoint', graph.getGraphCenterPoint());
     // console.log('graph-width-height:',graph.get('width'), graph.get('height'))
-
-    // const currentZoom = graph.getZoom();
-    // const zoomValue = 0.9;
-    // if (Math.abs(currentZoom - zoomValue) < 0.01) {
-    //   graph.focusItem(item);
-    //   // graph.moveTo(gcPoint.x - itemPoint.x, gcPoint.y - itemPoint.y, true);
-    //   // graph.moveTo( itemPoint.x - gcPoint.x, itemPoint.y - gcPoint.y, true);
-    // } else {
-    //   graph.zoomTo(
-    //     zoomValue,
-    //     getzoomCenter(zoomValue, currentZoom, gcPoint, itemPoint),
-    //     true
-    //   );
-    //   // graph.focusItem(item);
-    //   // graph.emit('afteractivaterelations', { item: e.item, action: 'activate' });
-    // }
   },
 
-  // onNodeClick(e) {
-  //   console.log('---------evt;');
-  //   const graph = this.graph;
-  //   const item = e.item;
-  //   if (item.hasState(this.selectedState)) {
-  //     graph.setItemState(item, this.selectedState, false);
-  //     return;
-  //   }
-  //   // this 上即可取到配置，如果不允许多个 'active'，先取消其他节点的 'active' 状态
-  //   if (!this.multiple) {
-  //     this.removeNodesState();
-  //   }
-  //   // 置点击的节点状态 'active' 为 true
-  //   graph.setItemState(item, this.selectedState, true);
-  // },
-  // onCanvasClick(e) {
-  //   // shouldUpdate 可以由用户复写，返回 true 时取消所有节点的 'active' 状态，即将 'active' 状态置为 false
-  //   if (this.shouldUpdate(e)) {
-  //     this.removeNodesState();
-  //   }
-  // },
-  // removeNodesState() {
-  //   graph.findAllByState('node', this.selectedState).forEach((node) => {
-  //     graph.setItemState(node, this.selectedState, false);
-  //   });
-  //   graph.findAllByState('combo', this.selectedState).forEach((combo) => {
-  //     graph.setItemState(combo, this.selectedState, false);
-  //   });
-  // },
 };

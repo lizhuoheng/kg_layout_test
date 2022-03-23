@@ -1,3 +1,5 @@
+import { mix } from '@antv/util';
+
 export default {
   /**
    * 定义自定义行为的默认参数，会与用户传入的参数进行合并
@@ -17,7 +19,11 @@ export default {
    * 初始化
    * @param {object} data 数据
    */
-  // init(data) {},
+  init(data) {
+    const self = this;
+    self.nodes = data.nodes;
+    self.edges = data.edges;
+  },
   /**
    * 执行布局
    */
@@ -52,14 +58,27 @@ export default {
    * 根据传入的数据进行布局
    * @param {object} data 数据
    */
-  // layout(data) {},
+  layout(data) {
+    const self = this;
+    self.init(data);
+    self.execute();
+  },
   /**
    * 更新布局配置，但不执行布局
    * @param {object} cfg 需要更新的配置项
    */
-  updateCfg(cfg) {},
+  updateCfg(cfg) {
+    const self = this;
+    mix(self, cfg);
+  },
   /**
    * 销毁
    */
-  // destroy() {},
+  destroy() {
+    const self = this;
+    self.positions = null;
+    self.nodes = null;
+    self.edges = null;
+    self.destroyed = true;
+  },
 };

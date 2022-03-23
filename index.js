@@ -137,6 +137,16 @@ const height = container.scrollHeight || 580;
 //   fixToNode: 'true',
 // });
 
+const panel = document.createElement('div');
+panel.id = 'panel';
+const nebulaModeBtn = document.createElement('input');
+nebulaModeBtn.type = 'button';
+nebulaModeBtn.value = '显示所有节点（探索模式/专注模式？）';
+
+panel.appendChild(nebulaModeBtn);
+
+container.appendChild(panel);
+
 const graph = new G6.Graph({
   container: 'container',
   renderer: 'canvas', // svg  canvas
@@ -298,11 +308,6 @@ const graph = new G6.Graph({
   },
 });
 graph.data(data);
-// const combos = graph.getCombos();
-// combos.forEach((combo, index) => {
-//   const hasSelected = combo.hasState('selected');
-//   graph.setItemState(combo, 'visible ', false);
-// });
 
 graph.render();
 
@@ -338,6 +343,82 @@ graph.render();
 //     },
 //   });
 // });
+
+// graph.on('afterlayout', (evt) => {
+//   if (graph.cfg.layout.type && graph.cfg.layout.type == 'custom-centric') {
+//     // nebulaModeBtn.disabled = false;
+//     // focusModeBtn.disabled = true;
+//   } else {
+//     // nebulaModeBtn.disabled = true;
+//     // focusModeBtn.disabled = false;
+//   }
+// });
+
+nebulaModeBtn.addEventListener('click', (e) => {
+  const nodes = graph.getNodes();
+  const combos = graph.getCombos();
+  const edges = graph.getEdges();
+  const vEdges = graph.get('vedges');
+  const nodeLength = nodes.length;
+  const comboLength = combos.length;
+  const edgeLength = edges.length;
+  const vEdgeLength = vEdges.length;
+  for (let i = 0; i < nodeLength; i++) {
+    const node = nodes[i];
+    node.show();
+    if (node.hasState('selected')) {
+      graph.setItemState(node, 'selected', false);
+      graph.setItemState(node, 'active', true);
+    } else {
+    }
+    // graph.setItemState(node, 'active', false);
+  }
+  for (let i = 0; i < comboLength; i++) {
+    const combo = combos[i];
+    combo.show();
+    // graph.setItemState(combo, 'active', false);
+  }
+
+  for (let i = 0; i < edgeLength; i++) {
+    const edge = edges[i];
+    edge.show();
+    // graph.setItemState(edge, 'active', false);
+  }
+
+  for (let i = 0; i < vEdgeLength; i++) {
+    const vEdge = vEdges[i];
+    vEdge.show();
+    // graph.setItemState(vEdge, 'active', false);
+  }
+  // graph.updateLayout({
+  //   pipes: [
+  //     {
+  //       type: 'circular', //circular  dagre  concentric
+  //       // 根据节点的某个字段判断是否属于该子图
+  //       nodesFilter: (node) => node.subGraphId === '0',
+  //       startRadius: 250,
+  //       endRadius: 500,
+  //       angleRatio: 1,
+  //       // divisions:3,
+  //       //rankdir: 'LR',
+  //       //align: 'UL',
+  //       sortByCombo: true,
+  //       controlPoints: true,
+  //       nodesepFunc: () => 1,
+  //       ranksepFunc: () => 1,
+  //     },
+  //     {
+  //       type: 'grid',
+  //       begin: [1000, 0],
+  //       // radius: 100,
+  //       // angleRatio: 0.5,
+  //       // startRadius: 500,
+  //       // endRadius: 250,
+  //       nodesFilter: (node) => node.subGraphId === '1',
+  //     },
+  //   ],
+  // });
+});
 
 if (typeof window !== 'undefined')
   window.onresize = () => {
