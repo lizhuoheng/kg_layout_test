@@ -3,36 +3,6 @@ import { data } from './data';
 import activateKnode from './activate-knode';
 import customCentric from './custom-centric';
 import kgtooltip from './kg-tooltip';
-// import { GraphLayoutPredict } from '@antv/vis-predict-engine';
-
-// data.nodes.forEach((node) => {
-//   switch (node.comboId) {
-//     case 'A':
-//       node.style = {
-//         fill: '#C4E3B2',
-//         stroke: '#aaa',
-//       };
-//       break;
-//     case 'B':
-//       node.style = {
-//         fill: '#99C0ED',
-//         stroke: '#aaa',
-//       };
-//       break;
-//     case 'C':
-//       node.style = {
-//         fill: '#eee',
-//         stroke: '#aaa',
-//       };
-//       break;
-//     default:
-//       node.style = {
-//         fill: '#FDE1CE',
-//         stroke: '#aaa',
-//       };
-//       break;
-//   }
-// });
 
 data.nodes.forEach((node) => {
   if (node.userData.irtScore >= 8) {
@@ -109,6 +79,100 @@ data.nodes.forEach((node) => {
 G6.registerBehavior('activate-knode', activateKnode);
 // G6.registerBehavior('kg-tooltip', kgtooltip);
 G6.registerLayout('custom-centric', customCentric);
+G6.registerNode(
+  'circle-animate',
+  {
+    afterDraw(cfg, group) {
+      let r = cfg.size / 2;
+      if (isNaN(r)) {
+        r = cfg.size[0] / 2;
+      }
+      // 第一个背景圆
+      const back1 = group.addShape('circle', {
+        zIndex: -3,
+        attrs: {
+          x: 0,
+          y: 0,
+          r,
+          fill: 'red', //cfg.color
+          opacity: 0.6,
+        },
+        // must be assigned in G6 3.3 and later versions. it can be any value you want
+        name: 'circle-shape1',
+      });
+      // 第二个背景圆
+      const back2 = group.addShape('circle', {
+        zIndex: -2,
+        attrs: {
+          x: 0,
+          y: 0,
+          r,
+          fill: 'red', // 为了显示清晰，随意设置了颜色
+          opacity: 0.6,
+        },
+        // must be assigned in G6 3.3 and later versions. it can be any value you want
+        name: 'circle-shape2',
+      });
+      // 第三个背景圆
+      const back3 = group.addShape('circle', {
+        zIndex: -1,
+        attrs: {
+          x: 0,
+          y: 0,
+          r,
+          fill: 'red',
+          opacity: 0.6,
+        },
+        // must be assigned in G6 3.3 and later versions. it can be any value you want
+        name: 'circle-shape3',
+      });
+      group.sort(); // 排序，根据 zIndex 排序
+
+      // 第一个背景圆逐渐放大，并消失
+      back1.animate(
+        {
+          r: r + 10,
+          opacity: 0.1,
+        },
+        {
+          repeat: true, // 循环
+          duration: 3000,
+          easing: 'easeCubic',
+          delay: 0, // 无延迟
+        }
+      );
+
+      // 第二个背景圆逐渐放大，并消失
+      back2.animate(
+        {
+          r: r + 10,
+          opacity: 0.1,
+        },
+        {
+          repeat: true, // 循环
+          duration: 3000,
+          easing: 'easeCubic',
+          delay: 1000, // 1 秒延迟
+        }
+      ); // 1 秒延迟
+
+      // 第三个背景圆逐渐放大，并消失
+      back3.animate(
+        {
+          r: r + 10,
+          opacity: 0.1,
+        },
+        {
+          repeat: true, // 循环
+          duration: 3000,
+          easing: 'easeCubic',
+          delay: 2000, // 2 秒延迟
+        }
+      );
+    },
+  },
+  'circle'
+);
 
 const container = document.getElementById('container');
 const width = container.scrollWidth;
@@ -257,11 +321,11 @@ const graph = new G6.Graph({
   defaultEdge: {
     //type: 'arc', //polyline
     size: 2,
-    color: '#f5f5f590',
+    color: '#f5f5f500', //#f5f5f590
     style: {
       endArrow: {
         path: 'M 0,0 L 8,3 L 8,-3 Z',
-        fill: '#f5f5f5',
+        fill: '#f5f5f500', //#f5f5f5
         // path: G6.Arrow.vee(10, -20, 10), // 内置箭头，参数为箭头宽度、长度、偏移量 d（默认为 0）
         // d: 10 // 偏移量
       },
@@ -419,6 +483,9 @@ nebulaModeBtn.addEventListener('click', (e) => {
   //   ],
   // });
 });
+
+var item = graph.findById('20');
+item.update({ type: 'circle-animate' });
 
 if (typeof window !== 'undefined')
   window.onresize = () => {
